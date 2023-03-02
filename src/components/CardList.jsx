@@ -7,6 +7,9 @@ const CardList = ({ robots }) => {
     //     return <Card key= {data.id} data = {data}/>
     // })
 
+    // if(true){
+    //     throw new Error("OOps something went weong")
+    // }
     return (
         <>
             {/* {cardComponents} */}
