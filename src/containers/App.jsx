@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import './App.css'
 import CardList from "../components/CardList";
+import ErrorBoundry from "../components/ErrorBoundry";
 import Scroll from "../components/Scroll";
 import SearchBox from "../components/SearchBox";
-import ErrorBoundry from "../components/ErrorBoundry";
-
+import "./App.css";
 
 class App extends Component {
-
     constructor() {
         super();
         this.state = {
             robots: [],
-            searchfield: ''
-        }
+            searchfield: "",
+        };
     }
-
     render() {
-
         const filteredRobots = this.state.robots.filter((robot) => {
-            return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
-        })
+            return robot.name
+                .toLowerCase()
+                .includes(this.state.searchfield.toLowerCase());
+        });
 
         if (this.state.robots.length) {
             return (
@@ -33,27 +31,22 @@ class App extends Component {
                         </ErrorBoundry>
                     </Scroll>
                 </div>
-            )
+            );
+        } else {
+            return <h1>Loading...</h1>;
         }
-        else {
-            return <h1>Loading...</h1>
-        }
-
-
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch("https://jsonplaceholder.typicode.com/users")
             .then((respone) => respone.json())
             .then((users) => this.setState({ robots: users }))
-            .catch((error) => console.log(error))
-
+            .catch((error) => console.log(error));
     }
 
     onSearchChange = (event) => {
-        this.setState({ searchfield: event.target.value })
-    }
-
+        this.setState({ searchfield: event.target.value });
+    };
 }
 
-export default App
+export default App;
